@@ -7,7 +7,7 @@ class Pixela:
         self.username = username
         self.token = token
         self.pixela_endpoint = "https://pixe.la/v1/users"
-        self.graph_id = "graph1"
+        self.graph_id = None
         self.header = {
             "X-USER-TOKEN": self.token
         }
@@ -30,3 +30,22 @@ class Pixela:
 
         response = requests.delete(url=url, headers=self.header)
         print(response.text)
+
+    def create_graph(self, graph_name, graph_unit="Seeds", graph_type="int", graph_color="kuro"):
+        self.graph_id = graph_name.strip().lower() + "1"
+
+        #print(f"Graph Name:{graph_name} / GraphId: {self.graph_id}")
+
+        url = f"{self.pixela_endpoint}/{self.username}/graphs"
+
+        body = {
+            "id": self.graph_id,
+            "name": graph_name,
+            "unit": graph_unit,
+            "type": graph_type,
+            "color": graph_color,
+        }
+
+        response = requests.post(url=url, json=body, headers=self.header)
+        print(response.text)
+        print(f"{self.pixela_endpoint}/{self.username}/graphs/{self.graph_id}.html")
