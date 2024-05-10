@@ -1,4 +1,10 @@
 import requests
+from datetime import datetime
+
+
+def get_today():
+    today = datetime.today()
+    return today.strftime('%Y%m%d')
 
 
 class Pixela:
@@ -7,7 +13,8 @@ class Pixela:
         self.username = username
         self.token = token
         self.pixela_endpoint = "https://pixe.la/v1/users"
-        self.graph_id = None
+        self.graph_id = "garden1"
+        self.today = get_today()
         self.header = {
             "X-USER-TOKEN": self.token
         }
@@ -32,9 +39,6 @@ class Pixela:
         print(response.text)
 
     def create_graph(self, graph_name, graph_unit="Seeds", graph_type="int", graph_color="kuro"):
-        self.graph_id = graph_name.strip().lower() + "1"
-
-        #print(f"Graph Name:{graph_name} / GraphId: {self.graph_id}")
 
         url = f"{self.pixela_endpoint}/{self.username}/graphs"
 
@@ -50,10 +54,21 @@ class Pixela:
         print(response.text)
         print(f"{self.pixela_endpoint}/{self.username}/graphs/{self.graph_id}.html")
 
-    def delete_graph(self, graph_code=None):
-        if graph_code is None:
-            graph_code = self.graph_id
-
-        url = f"{self.pixela_endpoint}/{self.username}/graphs/{graph_code}"
+    def delete_graph(self):
+        url = f"{self.pixela_endpoint}/{self.username}/graphs/{self.graph_id}"
         response = requests.delete(url=url, headers=self.header)
+        print(response.text)
+
+    def post_pixel(self, quantity, date=None):
+        if date is None:
+            date = self.today
+
+        url = f"{self.pixela_endpoint}/{self.username}/graphs/{self.graph_id}"
+
+        body = {
+            "date": date,
+            "quantity": quantity,
+        }
+
+        response = requests.post(url=url, headers=self.header, json=body)
         print(response.text)

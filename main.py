@@ -7,7 +7,8 @@ try_account = Pixela(username=PIXELA_USER, token=PIXELA_TOKEN)
 #try_account.create_new_user()  # Run this only once
 #try_account.delete_user()  # DANGER!
 
-#try_account.create_graph("Graph") # https://pixe.la/v1/users/testov/graphs/graph1.html
-#try_account.delete_graph(graph_code="graph1")
+#try_account.create_graph("Garden Planning")  # Run this only once https://pixe.la/v1/users/testov/graphs/garden1.html
+#try_account.delete_graph()  # DANGER!
 
+try_account.post_pixel(quantity="250")
 
