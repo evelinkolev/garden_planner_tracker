@@ -7,6 +7,7 @@ class Pixela:
         self.username = username
         self.token = token
         self.pixela_endpoint = "https://pixe.la/v1/users"
+        self.graph_id = "graph1"
         self.header = {
             "X-USER-TOKEN": self.token
         }
@@ -21,5 +22,7 @@ class Pixela:
 
         response = requests.post(url=self.pixela_endpoint, json=user_param)
 
-        if response.status_code == 200:
-            return True
+        print(response.text)
+        print(f"https://pixe.la/@{self.username}")
+
+
