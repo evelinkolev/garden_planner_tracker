@@ -49,3 +49,11 @@ class Pixela:
         response = requests.post(url=url, json=body, headers=self.header)
         print(response.text)
         print(f"{self.pixela_endpoint}/{self.username}/graphs/{self.graph_id}.html")
+
+    def delete_graph(self, graph_code=None):
+        if graph_code is None:
+            graph_code = self.graph_id
+
+        url = f"{self.pixela_endpoint}/{self.username}/graphs/{graph_code}"
+        response = requests.delete(url=url, headers=self.header)
+        print(response.text)

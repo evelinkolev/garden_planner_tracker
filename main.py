@@ -8,5 +8,6 @@ try_account = Pixela(username=PIXELA_USER, token=PIXELA_TOKEN)
 #try_account.delete_user()  # DANGER!
 
 #try_account.create_graph("Graph") # https://pixe.la/v1/users/testov/graphs/graph1.html
+#try_account.delete_graph(graph_code="graph1")
 
 
