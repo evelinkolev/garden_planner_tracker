@@ -25,4 +25,8 @@ class Pixela:
         print(response.text)
         print(f"https://pixe.la/@{self.username}")
 
+    def delete_user(self):
+        url = f"{self.pixela_endpoint}/{self.username}"
 
+        response = requests.delete(url=url, headers=self.header)
+        print(response.text)
